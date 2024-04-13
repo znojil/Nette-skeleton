@@ -8,7 +8,7 @@ use Nette\Http\IResponse;
 
 trait TError4xx{
 
-	private ?BadRequestException $exception;
+	private BadRequestException $exception;
 
 	public function actionDefault(): void{
 			$exception = $this->request->getParameter('exception');
@@ -17,7 +17,9 @@ trait TError4xx{
 				? $exception
 				: new BadRequestException('', IResponse::S404_NotFound);
 
-			$this->getHttpResponse()->setCode($this->exception->getHttpCode()); // need if $exception is null
+		if($exception === null){
+				$this->getHttpResponse()->setCode($this->exception->getHttpCode());
+		}
 	}
 
 	public function renderDefault(): void{
