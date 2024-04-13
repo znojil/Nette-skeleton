@@ -1,0 +1,59 @@
+parameters:
+	adminEmail: 'mail@example.com'
+	database:
+		host: localhost
+		user: root
+		password: root
+		name: table
+
+php:
+	date.timezone: 'Europe/Prague'
+	zlib.output_compression: true
+
+application:
+	catchExceptions: true
+	errorPresenter:
+		4xx: 'Error:Error4xx'
+		5xx: 'Error:Error5xx'
+	mapping:
+		*: ['App\Modules', '*\Modules', '*\*Presenter']
+
+database:
+	dsn: 'mysql:host=%database.host%;dbname=%database.name%'
+	user: %database.user%
+	password: %database.password%
+	options:
+		charset: utf8mb4
+		lazy: true
+
+latte:
+	strictParsing: true
+	strictTypes: true
+
+session:
+	autoStart: smart
+	cookieSamesite: Lax
+	debugger: true
+	expiration: 14 days
+	name: sid
+
+tracy:
+	dumpTheme: dark
+	email: %adminEmail%
+	maxDepth: 16
+	maxLength: 200
+	showLocation: true
+
+search:
+	-
+		in: %appDir%
+		classes:
+			- *Facade
+			- *Factory
+			- *Manager
+			- *Provider
+			- *Repository
+			- *Service
+
+services:
+	router: @App\Model\RouterFactory::createRouter

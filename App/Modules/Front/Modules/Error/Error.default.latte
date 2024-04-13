@@ -1,0 +1,8 @@
+{define title}Chyba{/define}
+
+{block content}
+	<h1>{include block 'title'} <code>{$code}</code></h1>
+
+	<h2>{$title}</h2>
+
+	<p n:ifcontent>{$message}</p>
