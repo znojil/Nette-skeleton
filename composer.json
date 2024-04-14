@@ -1,5 +1,12 @@
 {
 	"name": "znojil/nette-skeleton",
+	"description": "Nette: basic skeleton",
+	"keywords": [
+		"nette",
+		"skeleton"
+	],
+	"type": "project",
+	"license": "Unlicense",
 	"config": {
 		"platform": {
 			"php": "8.2"
@@ -9,7 +16,7 @@
 		"php": "8.2",
 		"nette/application": "^3.2",
 		"nette/bootstrap": "^3.2",
-		"nette/caching": "^3.2",
+		"nette/caching": "^3.3",
 		"nette/database": "^3.2",
 		"nette/di": "^3.2",
 		"nette/forms": "^3.2",
@@ -20,6 +27,9 @@
 		"nette/utils": "^4.0",
 		"latte/latte": "^3.0",
 		"tracy/tracy": "^2.10"
+	},
+	"require-dev": {
+		"nette/tester": "^2.5"
 	},
 	"minimum-stability": "stable",
 	"prefer-stable": true
