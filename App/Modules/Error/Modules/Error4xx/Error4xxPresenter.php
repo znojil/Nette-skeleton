@@ -13,27 +13,27 @@ final class Error4xxPresenter implements Application\IPresenter{
 	){}
 
 	public function run(Application\Request $request): ForwardResponse{
-			$requestParameter = $request->getParameter('request');
+		$requestParameter = $request->getParameter('request');
 
-			$module = 'Front';
-			$sep = ':';
+		$module = 'Front';
+		$sep = ':';
 		if($requestParameter !== null){
-				[$module, $presenter, $sep] = Application\Helpers::splitName($requestParameter->getPresenterName());
+			[$module, $presenter, $sep] = Application\Helpers::splitName($requestParameter->getPresenterName());
 		}
 
-			$explodedModule = explode($sep, $module);
+		$explodedModule = explode($sep, $module);
 		for($i = count($explodedModule); $i >= 1; $i--){
-				$testedErrorPresenter = implode($sep, $explodedModule) . ':Error';
+			$testedErrorPresenter = implode($sep, $explodedModule) . ':Error';
 			try{
-					$this->presenterFactory->getPresenterClass($testedErrorPresenter);
+				$this->presenterFactory->getPresenterClass($testedErrorPresenter);
 
-					break;
+				break;
 			}catch(\Throwable){
-					unset($explodedModule[$i - 1]);
+				unset($explodedModule[$i - 1]);
 			}
 		}
 
-			return new ForwardResponse($request->setPresenterName($testedErrorPresenter));
+		return new ForwardResponse($request->setPresenterName($testedErrorPresenter));
 	}
 
 }

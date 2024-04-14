@@ -8,16 +8,16 @@ use Nette\Application\Routers\RouteList;
 final class RouterFactory{
 
 	public function createRouter(): RouteList{
-			return (new RouteList)
-				/*->withModule('Admin')
-					->withPath('admin')
-						->addRoute(..)
-					->end()
-					->addRoute('admin[/<presenter>[/<action>]]', 'Dashboard:default')
-				->end()*/
-				->withModule('Front')
-					->addRoute('<presenter>[/<action>]', 'Home:default')
-				->end();
+		return (new RouteList)
+			/*->withModule('Admin')
+				->withPath('admin')
+					->addRoute(..)
+				->end()
+				->addRoute('admin[/<presenter>[/<action>]]', 'Dashboard:default')
+			->end()*/
+			->withModule('Front')
+				->addRoute('<presenter>[/<action>]', 'Home:default')
+			->end();
 	}
 
 }

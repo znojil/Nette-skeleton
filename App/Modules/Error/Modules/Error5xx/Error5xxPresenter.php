@@ -14,11 +14,11 @@ final class Error5xxPresenter implements Application\IPresenter{
 	){}
 
 	public function run(Application\Request $request): CallbackResponse{
-			$this->logger->log($request->getParameter('exception'), ILogger::EXCEPTION);
+		$this->logger->log($request->getParameter('exception'), ILogger::EXCEPTION);
 
-			return new CallbackResponse(function (): void{
-					require __DIR__ . '/500.html';
-			});
+		return new CallbackResponse(function (): void{
+			require __DIR__ . '/500.html';
+		});
 	}
 
 }

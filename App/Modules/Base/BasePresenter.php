@@ -12,44 +12,44 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter{
 
 
 	public function formatLayoutTemplateFiles(): array{
-			$called = static::class;
-			$classes = [$called] + class_parents($called);
+		$called = static::class;
+		$classes = [$called] + class_parents($called);
 
-			$list = [];
+		$list = [];
 		foreach($classes as $class){
 			if(str_starts_with($class, 'Nette\\') === true){
-					continue;
+				continue;
 			}
 
-				$presenterReflection = new \ReflectionClass($class);
-				$presenterDir = dirname($presenterReflection->getFileName());
+			$presenterReflection = new \ReflectionClass($class);
+			$presenterDir = dirname($presenterReflection->getFileName());
 
-				$list[] = $presenterDir . '/@layout.latte';
-				$list[] = $presenterDir . '/templates/@layout.latte';
+			$list[] = $presenterDir . '/@layout.latte';
+			$list[] = $presenterDir . '/templates/@layout.latte';
 		}
 
-			$list = array_unique(array_merge(
-				$list,
-				parent::formatLayoutTemplateFiles()
-			));
+		$list = array_unique(array_merge(
+			$list,
+			parent::formatLayoutTemplateFiles()
+		));
 
-			return $list;
+		return $list;
 	}
 
 	public function formatTemplateFiles(): array{
-			$explodedPresenter = explode(':', $this->getName());
-			$presenter = end($explodedPresenter);
-			$dir = dirname((new \ReflectionClass($this))->getFileName());
+		$explodedPresenter = explode(':', $this->getName());
+		$presenter = end($explodedPresenter);
+		$dir = dirname((new \ReflectionClass($this))->getFileName());
 
-			return array_merge(
-				[
-					"$dir/$this->view.latte",
-					"$dir/$presenter.$this->view.latte",
-					"$dir/templates/$this->view.latte",
-					"$dir/templates/$presenter.$this->view.latte"
-				],
-				parent::formatTemplateFiles()
-			);
+		return array_merge(
+			[
+				"$dir/$this->view.latte",
+				"$dir/$presenter.$this->view.latte",
+				"$dir/templates/$this->view.latte",
+				"$dir/templates/$presenter.$this->view.latte"
+			],
+			parent::formatTemplateFiles()
+		);
 	}
 
 }
